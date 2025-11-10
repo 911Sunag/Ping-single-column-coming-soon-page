@@ -5,9 +5,9 @@ const button = document.getElementById("btn");
 
 
 function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   return regex.test(email);
-}
+} 
 
 button.addEventListener("click", (r) => {
   r.preventDefault();
@@ -30,3 +30,11 @@ button.addEventListener("click", (r) => {
     emailInput.value = "";
   }
 });
+
+emailInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    button.click();
+  }
+});
+
