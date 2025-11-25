@@ -1,40 +1,35 @@
 // Get references
-const emailInput = document.getElementById("email");
-const errorMsg = document.getElementById("error");
-const button = document.getElementById("btn");
+const emailinput = document.querySelector("#email");
+const btn = document.querySelector("#btn");
+const errorMsg = document.querySelector("#error");
 
+//message here:
+//Whoops! It looks like you forgot to add your email.
+//Please provide a valid email address.
 
-function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  return regex.test(email);
-} 
+function validateEmail(ins) {
+  const validate = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  return validate.test(ins);
+}
 
-button.addEventListener("click", (r) => {
-  r.preventDefault();
-  const email = emailInput.value.trim();
-  emailInput.classList.remove("input-error", "input-success");
-  errorMsg.textContent ="";
-
-  if (email === "") {
-    errorMsg.textContent = "Whoops! It looks like you forgot to add your email.";
-    emailInput.classList.add("input-error");
-
-  } else if (!validateEmail(email)) {
+btn.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  const asEmail = emailinput.value.trim();
+  if (asEmail === "") {
+    errorMsg.textContent =
+      "Whoops! It looks like you forgot to add your email.";
+  } else if (!validateEmail(asEmail)) {
     errorMsg.textContent = "Please provide a valid email address.";
-    emailInput.classList.add("input-error");
-
   } else {
     errorMsg.textContent = "";
-    emailInput.classList.add("input-success");
-    alert("Thanks for subscribing!");
-    emailInput.value = "";
+    emailinput.value = "";
+    // alert("Thanks Mate");
   }
 });
 
-emailInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    button.click();
+emailinput.addEventListener("keypress", (evt) => {
+  if (evt.key === "Enter") {
+    evt.preventDefault();
+    btn.click();
   }
 });
-
